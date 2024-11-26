@@ -160,7 +160,7 @@ int main() {
 			This one does not bring joy: 15, 8, 99
 			Please notice: the number has to be bigger than 0.
 			*/
-			int primeNum = 0;
+			int primeNum = 0, reversePrimeNum = 0, primeNumDupl = 0;
 			printf("Enter a number:\n");
 			scanf("\n%d", &primeNum);
 			while (primeNum <= 0) {
@@ -168,17 +168,28 @@ int main() {
 				scanf("%*[^\n]");
 				scanf("\n%d", &primeNum);
 			}
+			primeNumDupl = primeNum;
+			while (primeNumDupl > 0) {
+				int digit = primeNumDupl % 10;
+				reversePrimeNum = reversePrimeNum * 10 + digit;
+				primeNumDupl /= 10;
+			}
 			int isPrime = 1;
 			if (primeNum == 1) {
 				isPrime = 0;
-			}
-
-			for (int i = 2; i < primeNum; i++) {
-				if (primeNum % i == 0) {
-					isPrime = 0;
-					break;
+			} else {
+				for (int i = 2; i < primeNum; i++) {
+					if (primeNum % i == 0) {
+						isPrime = 0;
+					}
+				}
+				for (int i = 2; i < reversePrimeNum; i++) {
+					if (reversePrimeNum % i == 0) {
+						isPrime = 0;
+					}
 				}
 			}
+
 			if (isPrime == 1) {
 				printf("This number completes the circle of joy!\n");
 			} else {
@@ -266,7 +277,7 @@ int main() {
 				scanf("%*[^\n]");
 				scanf("\n%d", &maximumNum);
 			}
-			for (int i = 1; i < maximumNum; i++) {
+			for (int i = 1; i <= maximumNum; i++) {
 				if ( (i % smileNum == 0) && (i % cheerNum == 0) ) {
 					printf("Festival!\n");
 				} else if ( i % cheerNum == 0 ) {
